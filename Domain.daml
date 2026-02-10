@@ -1,0 +1,64 @@
+module Domain where
+
+newtype Hkid = Hkid Text deriving (Eq, Show)
+
+data VehicleClass =
+    PrivateCar
+  | LightGoodsVehicle
+  | Motorcycle
+  | PrivateLightBus
+  | PublicLightBus
+  | Taxi
+  | PrivateBus
+  | PublicBus
+  | InvalidCarriage
+  | GovernmentVehicle
+  | PublicBusFranchised
+  | MediumGoodsVehicle
+  | HeavyGoodsVehicle
+  | ArticulatedVehicle
+  | SpecialPurposeVehicle
+  | MotorTricycle
+  deriving (Eq, Show, Ord)
+
+fromClass : VehicleClass -> Int
+fromClass PrivateCar = 1
+fromClass LightGoodsVehicle = 2
+fromClass Motorcycle = 3
+fromClass PrivateLightBus = 4
+fromClass PublicLightBus = 5
+fromClass Taxi = 6
+fromClass PrivateBus = 9
+fromClass PublicBus = 10
+fromClass InvalidCarriage = 15
+fromClass GovernmentVehicle = 16
+fromClass PublicBusFranchised = 17
+fromClass MediumGoodsVehicle = 18
+fromClass HeavyGoodsVehicle = 19
+fromClass ArticulatedVehicle = 20
+fromClass SpecialPurposeVehicle = 21
+fromClass MotorTricycle = 22
+
+toClass : Int -> Optional VehicleClass
+toClass  1 = Some PrivateCar
+toClass  2 = Some LightGoodsVehicle
+toClass  3 = Some Motorcycle
+toClass  4 = Some PrivateLightBus
+toClass  5 = Some PublicLightBus
+toClass  6 = Some Taxi
+toClass  9 = Some PrivateBus
+toClass 10 = Some PublicBus
+toClass 15 = Some InvalidCarriage
+toClass 16 = Some GovernmentVehicle
+toClass 17 = Some PublicBusFranchised
+toClass 18 = Some MediumGoodsVehicle
+toClass 19 = Some HeavyGoodsVehicle
+toClass 20 = Some ArticulatedVehicle
+toClass 21 = Some SpecialPurposeVehicle
+toClass 22 = Some MotorTricycle
+toClass  _ = None
+
+data ApplicationError =
+    AlreadyLicensed
+  | InvalidVehicleClass
+  deriving (Eq, Show)
