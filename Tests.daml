@@ -1,6 +1,21 @@
 module Tests where
 
+import qualified DA.Set as S
 import Daml.Script
+import DA.Action
+import Domain
+import Licencing
 
-test : Script ()
-test = pure ()
+test_licence_application_creation : Script ()
+test_licence_application_creation = do
+  authority <- allocateParty "Authority"
+  applicant <- allocateParty "Applicant"
+
+  let hkid = Hkid "A123456(7)"
+      vehicleClasses = S.fromList [PrivateCar, Motorcycle]
+
+  void $ applicant `submit` createCmd LicenceApplication with
+    id = hkid
+    applicant = applicant
+    authority = authority
+    vehicleClass = vehicleClasses

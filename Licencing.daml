@@ -22,7 +22,7 @@ template LicenceApplication
     authority : Party
     vehicleClass : S.Set VehicleClass
   where
-    key (id, authority) : (Hkid, Party)
+    key (id, applicant) : (Hkid, Party)
     maintainer key._2
     signatory applicant
 
