@@ -1,0 +1,21 @@
+module DomainTests where
+
+import DA.Assert
+import DA.Foldable
+import Daml.Script
+import Domain
+
+test_vehicle_class_conversion : Script ()
+test_vehicle_class_conversion = do
+  let classes = [ PrivateCar, LightGoodsVehicle, Motorcycle, PrivateLightBus, PublicLightBus
+                , Taxi, PrivateBus, PublicBus, InvalidCarriage, GovernmentVehicle
+                , PublicBusFranchised, MediumGoodsVehicle, HeavyGoodsVehicle
+                , ArticulatedVehicle, SpecialPurposeVehicle, MotorTricycle
+                ]
+
+  -- Test fromClass and toClass are inverses for valid classes
+  mapA_ (((===) . toClass . fromClass) <*> Some) classes
+
+  -- Test toClass returns None for invalid class numbers
+  toClass 0 === None
+  toClass 8 === None

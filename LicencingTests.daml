@@ -1,4 +1,4 @@
-module Tests where
+module LicencingTests where
 
 import qualified DA.Set as S
 import Daml.Script
